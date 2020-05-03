@@ -1,0 +1,100 @@
+version: '3.7'
+services:
+
+   naming-server:
+    build:
+      context: ServerEureka
+      dockerfile: Dockerfile
+    container_name: naming-server
+    ports:
+      - "8761:8761"
+    restart: always
+    volumes:
+      - C://Notes1:/tmp 
+    networks:
+      - note-compose-network
+
+   zuul-gateway-server:
+    build:
+      context: ServerProxyZuul
+      dockerfile: Dockerfile 
+    container_name: zuul-gateway-server 
+    ports:
+       - "8765:8765"
+    restart: always
+    depends_on:
+       - naming-server
+    volumes:
+       - C://Notes1:/tmp
+    networks:
+       - note-compose-network
+
+   auth-server:
+    build:
+      context: ServerOAuth2
+      dockerfile: Dockerfile   
+    container_name: auth-server 
+    ports:
+       - "8282:8282"
+    restart: always
+    depends_on:
+       - naming-server
+    volumes:
+       - C://Notes1:/tmp
+    networks:
+       - note-compose-network
+
+   file-path-service:
+    build:
+      context: FilePathService
+      dockerfile: Dockerfile  
+    container_name: file-path-service 
+    ports:
+       - "8100:8100"
+    restart: always
+    depends_on:
+       - naming-server
+       - zuul-gateway-server
+       - auth-server
+    volumes:
+       - C://Notes1:/tmp
+    networks:
+       - note-compose-network
+
+   file-info-service:
+     build:
+       context: FileInfoService
+       dockerfile: Dockerfile
+     container_name: file-info-service  
+     ports:
+       - "8200:8200"
+     restart: always
+     depends_on:
+       - naming-server
+       - zuul-gateway-server
+     networks:
+       - note-compose-network
+
+   note-create-service:
+    build:
+      context: NoteCreatorService
+      dockerfile: Dockerfile
+    container_name: note-create-service    
+    ports:
+       - "8000:8000"
+    restart: always
+    depends_on:
+       - naming-server
+       - zuul-gateway-server
+       - auth-server
+       - file-path-service
+    volumes:
+       - C://Notes1:/tmp
+    networks:
+       - note-compose-network
+
+  
+# Networks to be created to facilitate communication between containers
+networks:
+  note-compose-network:
+  # docker-compose up --build

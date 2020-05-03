@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "5ce1df28-c4bf-4f4b-8f17-ac632bfce82f",
+		"name": "Spring Boot Microservices Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "File write service",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "pratik",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "pratz",
+						"type": "text"
+					},
+					{
+						"key": "GrantType",
+						"value": "password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\":\"03052020_2\",\n\"content\":\"Now in docker microservices, i have total 6 projects\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/file/write",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"file",
+						"write"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FilePath",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDAzNDUxNjIsInVzZXJfbmFtZSI6InNuZWhhbCIsImF1dGhvcml0aWVzIjpbIkNBTl9XUklURSIsIkNBTl9SRUFEIl0sImp0aSI6ImNmNTE5MTBkLTk0ODItNDg3ZC1hZWQxLWVhZGZkZmU4MGI3MCIsImNsaWVudF9pZCI6IndlYiIsInNjb3BlIjpbIlJFQUQiLCJXUklURSJdfQ.Uknd7pZu4mZ49n-EcgxG6UFw8VHuWFqkoHrhkHgc4Tw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8100/get/path",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"get",
+						"path"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FilePath through zuul",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTY2OTk0MzksInVzZXJfbmFtZSI6InNuZWhhbCIsImF1dGhvcml0aWVzIjpbIkNBTl9XUklURSIsIkNBTl9SRUFEIl0sImp0aSI6IjRhYTkxYzgzLTNiNjQtNDNlNi04NWQ5LTgwMDc5ZDIyNTMzZCIsImNsaWVudF9pZCI6IndlYiIsInNjb3BlIjpbIlJFQUQiLCJXUklURSJdfQ.dNY9hYFSeTlz2pAFASHxWGzwhD0iamy7ebQPFC41jj8",
+						"disabled": true
+					},
+					{
+						"key": "GrantType",
+						"value": "password",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "pratik",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "pratz",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8765/file-path-service/get/path",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"file-path-service",
+						"get",
+						"path"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OAuth token Check",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "web",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "webpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8282/oauth/check_token?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTk5OTIwMDcsInVzZXJfbmFtZSI6InNuZWhhbCIsImF1dGhvcml0aWVzIjpbIkNBTl9XUklURSIsIkNBTl9SRUFEIl0sImp0aSI6Ijc5OGNlYmZmLTM2MjItNGY2Mi04M2U1LTg5YzI3ZmU0MWJhZiIsImNsaWVudF9pZCI6IndlYiIsInNjb3BlIjpbIlJFQUQiLCJXUklURSJdfQ.VCxeQH0exXgpvH1iYKpdT2PApBmn8FSQe03vQY2nDiI",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8282",
+					"path": [
+						"oauth",
+						"check_token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"disabled": true
+						},
+						{
+							"key": "username",
+							"value": "pratik",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "pratz",
+							"disabled": true
+						},
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTk5OTIwMDcsInVzZXJfbmFtZSI6InNuZWhhbCIsImF1dGhvcml0aWVzIjpbIkNBTl9XUklURSIsIkNBTl9SRUFEIl0sImp0aSI6Ijc5OGNlYmZmLTM2MjItNGY2Mi04M2U1LTg5YzI3ZmU0MWJhZiIsImNsaWVudF9pZCI6IndlYiIsInNjb3BlIjpbIlJFQUQiLCJXUklURSJdfQ.VCxeQH0exXgpvH1iYKpdT2PApBmn8FSQe03vQY2nDiI"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OAuth token fetch",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "webpass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "web",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8282/oauth/token?grant_type=password&username=snehal&password=sneu",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8282",
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "username",
+							"value": "snehal"
+						},
+						{
+							"key": "password",
+							"value": "sneu"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OAuth token fetch Copy",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "web",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "webpass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://192.168.99.100:8282/oauth/token?grant_type=password&username=snehal&password=sneu",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"100"
+					],
+					"port": "8282",
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "username",
+							"value": "snehal"
+						},
+						{
+							"key": "password",
+							"value": "sneu"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "File info get service",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/file/path",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"file",
+						"path"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "File info service -get status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8200/get/path",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8200",
+					"path": [
+						"get",
+						"path"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "File info service -get status Zuul",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8765/file-info-service/get/path",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"file-info-service",
+						"get",
+						"path"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
